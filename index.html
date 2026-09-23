@@ -14,8 +14,9 @@
     --ink: #1C1917;
     --ink-muted: #57534E;
     --ink-light: #A8A29E;
-    --terracotta: #C2714F;
-    --terracotta-light: #F0E4DC;
+    --red: #E8432A;
+    --red-hover: #C1371F;
+    --red-light: #FBE2DB;
     --sage: #6B7C6A;
     --sage-light: #E4EBE3;
     --border: rgba(28,25,23,0.1);
@@ -71,7 +72,7 @@
     cursor: pointer;
   }
 
-  .nav-links a:hover, .nav-links a.active { color: var(--terracotta); }
+  .nav-links a:hover, .nav-links a.active { color: var(--red); }
 
   /* SECTIONS */
   section { display: none; animation: fadeUp 0.4s ease; }
@@ -88,71 +89,37 @@
     padding: 5rem 2.5rem;
   }
 
-  /* BANNER */
-  .banner {
+  /* HERO */
+  .hero {
     width: 100%;
-    height: 540px;
-    position: relative;
-    overflow: hidden;
+    background: var(--red);
+    padding: 5.5rem 2.5rem 4rem;
   }
 
-  .banner img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center 70%;
-    display: block;
-  }
+  .hero-inner { max-width: 860px; margin: 0 auto; }
 
-  .banner-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      to right,
-      rgba(20,18,16,0.55) 0%,
-      rgba(20,18,16,0.25) 50%,
-      rgba(20,18,16,0.05) 100%
-    );
-  }
-
-  .banner-text {
-    position: absolute;
-    bottom: 2.5rem;
-    left: 2.5rem;
-  }
-
-  .banner-text h1 {
-    font-family: var(--serif);
-    font-size: 3.2rem;
-    font-weight: 500;
-    color: #ffffff;
-    line-height: 1.1;
-    letter-spacing: -0.01em;
-    text-shadow: 0 2px 20px rgba(0,0,0,0.3);
-    margin-bottom: 0.5rem;
-  }
-
-  .banner-text p {
-    font-size: 15px;
-    color: rgba(255,255,255,0.82);
-    font-weight: 300;
-    letter-spacing: 0.02em;
-  }
-
-  .banner-caption {
-    position: absolute;
-    bottom: 1rem;
-    right: 1.5rem;
+  .hero-label {
     font-size: 11px;
-    color: rgba(255,255,255,0.65);
-    letter-spacing: 0.04em;
-    font-style: italic;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 1.5rem;
   }
 
-  .banner-actions {
+  .hero-name {
+    font-family: var(--serif);
+    font-size: clamp(2.2rem, 5vw, 3.4rem);
+    font-weight: 600;
+    color: var(--warm-white);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin-bottom: 1.75rem;
+  }
+
+  .hero-actions {
     display: flex;
     gap: 1rem;
-    margin-top: 1.25rem;
   }
 
   .btn {
@@ -169,10 +136,10 @@
     display: inline-block;
   }
 
-  .btn-primary { background: var(--terracotta); color: white; }
-  .btn-primary:hover { background: #B5603D; }
-  .btn-ghost { background: rgba(255,255,255,0.15); color: white; border: 1px solid rgba(255,255,255,0.4); backdrop-filter: blur(4px); }
-  .btn-ghost:hover { background: rgba(255,255,255,0.25); }
+  .btn-primary { background: var(--warm-white); color: var(--red); font-weight: 600; }
+  .btn-primary:hover { background: #ffffff; }
+  .btn-ghost { background: transparent; color: var(--warm-white); border: 1px solid rgba(255,255,255,0.5); }
+  .btn-ghost:hover { background: rgba(255,255,255,0.12); }
   .btn-outline { background: transparent; color: var(--ink); border: 1px solid var(--border); }
   .btn-outline:hover { border-color: var(--ink-muted); background: rgba(28,25,23,0.04); }
 
@@ -200,7 +167,7 @@
     height: 200px;
     border-radius: 8px;
     overflow: hidden;
-    border: 1px solid rgba(194,113,79,0.15);
+    border: 1px solid rgba(232,67,42,0.15);
     flex-shrink: 0;
   }
 
@@ -232,7 +199,7 @@
     font-family: var(--serif);
     font-size: 2rem;
     font-weight: 500;
-    color: var(--terracotta);
+    color: var(--red);
     line-height: 1;
     margin-bottom: 6px;
   }
@@ -250,7 +217,7 @@
     font-weight: 500;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--terracotta);
+    color: var(--red);
     margin-bottom: 0.8rem;
     display: flex;
     align-items: center;
@@ -261,7 +228,7 @@
     content: '';
     width: 24px;
     height: 1px;
-    background: var(--terracotta);
+    background: var(--red);
     display: inline-block;
   }
 
@@ -316,14 +283,14 @@
     flex-direction: column;
   }
 
-  .project-card:hover { border-color: rgba(194,113,79,0.35); transform: translateY(-2px); }
+  .project-card:hover { border-color: rgba(232,67,42,0.35); transform: translateY(-2px); }
 
   .project-type {
     font-size: 11px;
     font-weight: 500;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--terracotta);
+    color: var(--red);
     margin-bottom: 0.75rem;
   }
 
@@ -365,7 +332,7 @@
 
   .project-link {
     font-size: 12px;
-    color: var(--terracotta);
+    color: var(--red);
     text-decoration: none;
     font-weight: 500;
     letter-spacing: 0.02em;
@@ -379,7 +346,7 @@
   .research-card {
     background: var(--warm-white);
     border: 1px solid var(--border);
-    border-left: 3px solid var(--terracotta);
+    border-left: 3px solid var(--red);
     border-radius: 0 8px 8px 0;
     padding: 1.75rem 2rem;
     transition: background 0.2s;
@@ -442,7 +409,7 @@
     text-decoration: none;
   }
 
-  .cv-download:hover { border-color: var(--terracotta); color: var(--terracotta); }
+  .cv-download:hover { border-color: var(--red); color: var(--red); }
 
   .cv-grid {
     display: grid;
@@ -459,7 +426,7 @@
     font-weight: 500;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--terracotta);
+    color: var(--red);
     margin-bottom: 1.25rem;
   }
 
@@ -529,18 +496,18 @@
     cursor: pointer;
   }
 
-  .contact-link:hover { border-color: var(--terracotta); color: var(--terracotta); }
+  .contact-link:hover { border-color: var(--red); color: var(--red); }
 
   .contact-icon {
     width: 32px;
     height: 32px;
-    background: var(--terracotta-light);
+    background: var(--red-light);
     border-radius: 6px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 15px;
-    color: var(--terracotta);
+    color: var(--red);
     flex-shrink: 0;
   }
 
@@ -576,12 +543,12 @@
     outline: none;
   }
 
-  .form-input:focus { border-color: var(--terracotta); }
+  .form-input:focus { border-color: var(--red); }
   textarea.form-input { resize: vertical; min-height: 110px; }
 
   .form-btn {
     width: 100%;
-    background: var(--terracotta);
+    background: var(--red);
     color: white;
     border: none;
     padding: 12px;
@@ -594,7 +561,7 @@
     letter-spacing: 0.02em;
   }
 
-  .form-btn:hover { background: #B5603D; }
+  .form-btn:hover { background: var(--red-hover); }
 
   @media (max-width: 640px) {
     .about-grid { grid-template-columns: 1fr; }
@@ -606,8 +573,7 @@
     .contact-layout { grid-template-columns: 1fr; }
     nav { padding: 0 1rem; }
     .nav-links { gap: 1rem; }
-    .banner { height: 340px; }
-    .banner-text h1 { font-size: 2rem; }
+    .hero { padding: 3.5rem 1.25rem 2.5rem; }
   }
 </style>
 </head>
@@ -626,14 +592,11 @@
 
 <!-- ABOUT -->
 <section id="about" class="active">
-  <div class="banner">
-    <img src="banner.jpeg" alt="Field research location">
-    <div class="banner-overlay"></div>
-    <p class="banner-caption">Field research, Ischia, Italy — 2025</p>
-    <div class="banner-text">
-      <h1>Nolan Sherwood</h1>
-      <p>Economics · Research · Policy</p>
-      <div class="banner-actions">
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="hero-label">Economics · Research · Policy</div>
+      <h1 class="hero-name">Nolan Sherwood</h1>
+      <div class="hero-actions">
         <a class="btn btn-primary" onclick="show('research')">View Research →</a>
         <a class="btn btn-ghost" onclick="show('cv')">Download CV</a>
       </div>
@@ -674,6 +637,15 @@
     </div>
     <div class="project-grid">
       <div class="project-card">
+        <div class="project-type">Data Visualization</div>
+        <div class="project-title">California Pharmacy Market Dashboard</div>
+        <div class="project-desc">An interactive dashboard exploring California pharmacy cost and utilization using HCAI's Healthcare Payments Data Snapshot, including a payer-level analysis estimating exposure to reported drug price increases across Commercial, Medicare, and Medi-Cal.</div>
+        <div class="project-footer">
+          <div class="project-tools"><span class="tool-tag">Python</span><span class="tool-tag">D3.js</span><span class="tool-tag">Plotly</span></div>
+          <a class="project-link" href="https://pharma.nolansherwood.com" target="_blank">View →</a>
+        </div>
+      </div>
+      <div class="project-card">
         <div class="project-type">Course Project</div>
         <div class="project-title">Safe Haven or Hazardous Miscalculation: The Mid-Valencia Bike Lane Pilot</div>
         <div class="project-desc">Using SF traffic crash data and a regression discontinuity design, we assess whether San Francisco's 18-month center median bike lane pilot on Valencia Street improved cyclist safety. We find a statistically insignificant effect on accident rates, with robustness confirmed via placebo tests and a DiD comparison to Mission Street.</div>
@@ -704,7 +676,7 @@
           <span>Advisor: Alessandra Cassar</span>
           <span>University of San Francisco, May 2026</span>
           <span>R · OLS · RDiT · Field Experiment</span>
-          <a href="thesis.pdf" target="_blank" style="color:var(--terracotta);font-weight:500;text-decoration:none;">PDF →</a>
+          <a href="thesis.pdf" target="_blank" style="color:var(--red);font-weight:500;text-decoration:none;">PDF →</a>
         </div>
       </div>
       <div class="research-card">
@@ -715,7 +687,7 @@
           <span>Solo-authored</span>
           <span>University of San Francisco, 2025</span>
           <span>R · DiD · Synthetic Control</span>
-          <a href="streetscape-evictions.pdf" target="_blank" style="color:var(--terracotta);font-weight:500;text-decoration:none;">PDF →</a>
+          <a href="streetscape-evictions.pdf" target="_blank" style="color:var(--red);font-weight:500;text-decoration:none;">PDF →</a>
         </div>
       </div>
     </div>

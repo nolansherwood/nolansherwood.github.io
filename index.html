@@ -10,13 +10,14 @@
 
   :root {
     --cream: #F9F6F0;
-    --warm-white: #FDFBF8;
+    --card-bg: #EDEFF1;
+    --card-bg-hover: #F5F6F7;
     --ink: #1C1917;
     --ink-muted: #57534E;
     --ink-light: #A8A29E;
-    --red: #E8432A;
-    --red-hover: #C1371F;
-    --red-light: #FBE2DB;
+    --accent: #5B7A94;
+    --accent-hover: #44607A;
+    --accent-light: #E1E8ED;
     --sage: #6B7C6A;
     --sage-light: #E4EBE3;
     --border: rgba(28,25,23,0.1);
@@ -76,7 +77,7 @@
     font-size: 16px;
     font-weight: 500;
     letter-spacing: 0.01em;
-    color: var(--warm-white);
+    color: var(--card-bg);
     text-shadow: 0 1px 8px rgba(0,0,0,0.45);
   }
 
@@ -89,7 +90,7 @@
   .nav-links a {
     font-size: 13px;
     font-weight: 400;
-    color: var(--warm-white);
+    color: var(--card-bg);
     text-decoration: none;
     letter-spacing: 0.03em;
     text-transform: uppercase;
@@ -128,7 +129,7 @@
     font-family: var(--serif);
     font-size: clamp(2.3rem, 5.5vw, 3.6rem);
     font-weight: 600;
-    color: var(--warm-white);
+    color: var(--card-bg);
     line-height: 1;
     letter-spacing: -0.01em;
     margin-bottom: 1.5rem;
@@ -145,7 +146,7 @@
     font-family: var(--serif);
     font-size: clamp(1.15rem, 2.2vw, 1.5rem);
     font-weight: 600;
-    color: var(--warm-white);
+    color: var(--card-bg);
     text-decoration: none;
     cursor: pointer;
     width: fit-content;
@@ -167,7 +168,7 @@
   }
 
   .stat {
-    background: var(--warm-white);
+    background: var(--card-bg);
     padding: 1.5rem;
     text-align: center;
   }
@@ -176,7 +177,7 @@
     font-family: var(--serif);
     font-size: 2rem;
     font-weight: 500;
-    color: var(--red);
+    color: var(--accent);
     line-height: 1;
     margin-bottom: 6px;
   }
@@ -194,7 +195,7 @@
     font-weight: 500;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--red);
+    color: var(--accent);
     margin-bottom: 0.8rem;
     display: flex;
     align-items: center;
@@ -205,7 +206,7 @@
     content: '';
     width: 24px;
     height: 1px;
-    background: var(--red);
+    background: var(--accent);
     display: inline-block;
   }
 
@@ -215,7 +216,7 @@
      purpose so the video shows through there instead. */
   .section-header {
     margin-bottom: 3rem;
-    background: var(--warm-white);
+    background: var(--card-bg);
     border: 1px solid var(--border);
     border-radius: 10px;
     padding: 2rem 2.25rem;
@@ -244,7 +245,7 @@
   }
 
   .project-card {
-    background: var(--warm-white);
+    background: var(--card-bg);
     border: 1px solid var(--border);
     border-radius: 8px;
     padding: 1.75rem;
@@ -253,14 +254,14 @@
     flex-direction: column;
   }
 
-  .project-card:hover { border-color: rgba(232,67,42,0.35); transform: translateY(-2px); }
+  .project-card:hover { border-color: rgba(91,122,148,0.35); transform: translateY(-2px); }
 
   .project-type {
     font-size: 11px;
     font-weight: 500;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--red);
+    color: var(--accent);
     margin-bottom: 0.75rem;
   }
 
@@ -302,7 +303,7 @@
 
   .project-link {
     font-size: 12px;
-    color: var(--red);
+    color: var(--accent);
     text-decoration: none;
     font-weight: 500;
     letter-spacing: 0.02em;
@@ -314,15 +315,15 @@
   .research-list { display: flex; flex-direction: column; gap: 1.5rem; }
 
   .research-card {
-    background: var(--warm-white);
+    background: var(--card-bg);
     border: 1px solid var(--border);
-    border-left: 3px solid var(--red);
+    border-left: 3px solid var(--accent);
     border-radius: 0 8px 8px 0;
     padding: 1.75rem 2rem;
     transition: background 0.2s;
   }
 
-  .research-card:hover { background: white; }
+  .research-card:hover { background: var(--card-bg-hover); }
 
   .research-status {
     font-size: 11px;
@@ -367,7 +368,7 @@
     align-items: center;
     gap: 8px;
     margin-bottom: 3rem;
-    background: var(--warm-white);
+    background: var(--card-bg);
     border: 1px solid var(--border);
     padding: 10px 18px;
     border-radius: 6px;
@@ -379,12 +380,12 @@
     text-decoration: none;
   }
 
-  .cv-download:hover { border-color: var(--red); color: var(--red); }
+  .cv-download:hover { border-color: var(--accent); color: var(--accent); }
 
   .cv-grid {
     display: grid;
     grid-template-columns: 220px 1fr;
-    background: var(--warm-white);
+    background: var(--card-bg);
     border: 1px solid var(--border);
     border-radius: 12px;
     padding: 2.5rem;
@@ -400,7 +401,7 @@
     font-weight: 500;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--red);
+    color: var(--accent);
     margin-bottom: 1.25rem;
   }
 
@@ -451,7 +452,7 @@
     color: var(--ink-muted);
     line-height: 1.8;
     margin-bottom: 2rem;
-    background: var(--warm-white);
+    background: var(--card-bg);
     border: 1px solid var(--border);
     border-radius: 10px;
     padding: 1.5rem 1.75rem;
@@ -469,28 +470,28 @@
     padding: 12px 16px;
     border: 1px solid var(--border);
     border-radius: 6px;
-    background: var(--warm-white);
+    background: var(--card-bg);
     transition: all 0.2s;
     cursor: pointer;
   }
 
-  .contact-link:hover { border-color: var(--red); color: var(--red); }
+  .contact-link:hover { border-color: var(--accent); color: var(--accent); }
 
   .contact-icon {
     width: 32px;
     height: 32px;
-    background: var(--red-light);
+    background: var(--accent-light);
     border-radius: 6px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 15px;
-    color: var(--red);
+    color: var(--accent);
     flex-shrink: 0;
   }
 
   .contact-form {
-    background: var(--warm-white);
+    background: var(--card-bg);
     border: 1px solid var(--border);
     border-radius: 10px;
     padding: 2rem;
@@ -521,12 +522,12 @@
     outline: none;
   }
 
-  .form-input:focus { border-color: var(--red); }
+  .form-input:focus { border-color: var(--accent); }
   textarea.form-input { resize: vertical; min-height: 110px; }
 
   .form-btn {
     width: 100%;
-    background: var(--red);
+    background: var(--accent);
     color: white;
     border: none;
     padding: 12px;
@@ -539,7 +540,7 @@
     letter-spacing: 0.02em;
   }
 
-  .form-btn:hover { background: var(--red-hover); }
+  .form-btn:hover { background: var(--accent-hover); }
 
   @media (max-width: 640px) {
     .project-grid { grid-template-columns: 1fr; }
@@ -632,7 +633,7 @@
           <span>Advisor: Alessandra Cassar</span>
           <span>University of San Francisco, May 2026</span>
           <span>R · OLS · RDiT · Field Experiment</span>
-          <a href="thesis.pdf" target="_blank" style="color:var(--red);font-weight:500;text-decoration:none;">PDF →</a>
+          <a href="thesis.pdf" target="_blank" style="color:var(--accent);font-weight:500;text-decoration:none;">PDF →</a>
         </div>
       </div>
       <div class="research-card">
@@ -643,7 +644,7 @@
           <span>Solo-authored</span>
           <span>University of San Francisco, 2025</span>
           <span>R · DiD · Synthetic Control</span>
-          <a href="streetscape-evictions.pdf" target="_blank" style="color:var(--red);font-weight:500;text-decoration:none;">PDF →</a>
+          <a href="streetscape-evictions.pdf" target="_blank" style="color:var(--accent);font-weight:500;text-decoration:none;">PDF →</a>
         </div>
       </div>
     </div>

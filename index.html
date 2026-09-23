@@ -32,13 +32,19 @@
     line-height: 1.7;
   }
 
+  /* The home/hero page is a fixed, full-viewport video -- no page scroll
+     while it's showing. Other sections (Portfolio/Research/CV/Contact)
+     need normal scrolling, so this is toggled on <body> by show() rather
+     than applied unconditionally. */
+  body.video-page { overflow: hidden; height: 100vh; }
+
   /* NAV */
   nav {
-    position: sticky;
+    position: fixed;
     top: 0;
-    background: rgba(249,246,240,0.92);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
+    left: 0;
+    right: 0;
+    background: transparent;
     padding: 0 2.5rem;
     display: flex;
     align-items: center;
@@ -74,6 +80,21 @@
 
   .nav-links a:hover, .nav-links a.active { color: var(--red); }
 
+  /* Over the video hero, nav text sits directly on unpredictable footage
+     instead of the cream page background, so it needs its own contrast
+     (white + shadow) rather than the ink tones used everywhere else. */
+  body.video-page .nav-name,
+  body.video-page .nav-links a {
+    color: var(--warm-white);
+    text-shadow: 0 1px 8px rgba(0,0,0,0.45);
+  }
+
+  body.video-page .nav-links a:hover,
+  body.video-page .nav-links a.active {
+    color: var(--warm-white);
+    opacity: 0.75;
+  }
+
   /* SECTIONS */
   section { display: none; animation: fadeUp 0.4s ease; }
   section.active { display: block; }
@@ -91,92 +112,59 @@
 
   /* HERO */
   .hero {
+    position: relative;
     width: 100%;
-    background: var(--red);
-    padding: 5.5rem 2.5rem 4rem;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
-  .hero-inner { max-width: 860px; margin: 0 auto; }
+  .hero-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+  }
 
-  .hero-label {
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.75);
-    margin-bottom: 1.5rem;
+  .hero-panel {
+    position: relative;
+    z-index: 1;
   }
 
   .hero-name {
     font-family: var(--serif);
-    font-size: clamp(2.2rem, 5vw, 3.4rem);
+    font-size: clamp(2.3rem, 5.5vw, 3.6rem);
     font-weight: 600;
     color: var(--warm-white);
-    line-height: 1.05;
+    line-height: 1;
     letter-spacing: -0.01em;
-    margin-bottom: 1.75rem;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 2px 18px rgba(0,0,0,0.5);
   }
 
-  .hero-actions {
+  .hero-links {
     display: flex;
-    gap: 1rem;
+    flex-direction: column;
+    gap: 0.4rem;
   }
 
-  .btn {
-    font-family: var(--sans);
-    font-size: 13px;
-    font-weight: 500;
-    padding: 10px 22px;
-    border-radius: 4px;
-    border: none;
-    cursor: pointer;
+  .hero-links a {
+    font-family: var(--serif);
+    font-size: clamp(1.15rem, 2.2vw, 1.5rem);
+    font-weight: 600;
+    color: var(--warm-white);
     text-decoration: none;
-    letter-spacing: 0.02em;
-    transition: all 0.2s;
-    display: inline-block;
+    cursor: pointer;
+    width: fit-content;
+    transition: opacity 0.2s;
+    text-shadow: 0 1px 14px rgba(0,0,0,0.5);
   }
 
-  .btn-primary { background: var(--warm-white); color: var(--red); font-weight: 600; }
-  .btn-primary:hover { background: #ffffff; }
-  .btn-ghost { background: transparent; color: var(--warm-white); border: 1px solid rgba(255,255,255,0.5); }
-  .btn-ghost:hover { background: rgba(255,255,255,0.12); }
-  .btn-outline { background: transparent; color: var(--ink); border: 1px solid var(--border); }
-  .btn-outline:hover { border-color: var(--ink-muted); background: rgba(28,25,23,0.04); }
-
-  /* ABOUT BODY */
-  .about-body { padding: 4rem 2.5rem; max-width: 860px; margin: 0 auto; }
-
-  .about-grid {
-    display: grid;
-    grid-template-columns: 1fr 200px;
-    gap: 4rem;
-    align-items: start;
-    margin-bottom: 3.5rem;
-  }
-
-  .about-bio {
-    font-size: 16px;
-    color: var(--ink-muted);
-    line-height: 1.85;
-  }
-
-  .about-bio p + p { margin-top: 1rem; }
-
-  .avatar-wrap {
-    width: 200px;
-    height: 200px;
-    border-radius: 8px;
-    overflow: hidden;
-    border: 1px solid rgba(232,67,42,0.15);
-    flex-shrink: 0;
-  }
-
-  .avatar-wrap img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center 20%;
-  }
+  .hero-links a:hover { opacity: 0.75; }
 
   .stats-row {
     display: grid;
@@ -230,22 +218,6 @@
     height: 1px;
     background: var(--red);
     display: inline-block;
-  }
-
-  .interests-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-
-  .tag {
-    background: var(--sage-light);
-    color: var(--sage);
-    font-size: 12px;
-    font-weight: 500;
-    padding: 5px 14px;
-    border-radius: 100px;
-    letter-spacing: 0.02em;
   }
 
   /* SHARED SECTION STYLES */
@@ -564,8 +536,6 @@
   .form-btn:hover { background: var(--red-hover); }
 
   @media (max-width: 640px) {
-    .about-grid { grid-template-columns: 1fr; }
-    .avatar-wrap { width: 100px; height: 100px; font-size: 32px; }
     .project-grid { grid-template-columns: 1fr; }
     .cv-grid { grid-template-columns: 1fr; }
     .cv-sidebar { border-right: none; border-bottom: 1px solid var(--border); padding-right: 0; padding-bottom: 2rem; margin-bottom: 2rem; }
@@ -573,11 +543,11 @@
     .contact-layout { grid-template-columns: 1fr; }
     nav { padding: 0 1rem; }
     .nav-links { gap: 1rem; }
-    .hero { padding: 3.5rem 1.25rem 2.5rem; }
+    .hero { padding: 0 1.5rem; }
   }
 </style>
 </head>
-<body>
+<body class="video-page">
 
 <nav>
   <span class="nav-name">Nolan Sherwood</span>
@@ -593,36 +563,15 @@
 <!-- ABOUT -->
 <section id="about" class="active">
   <div class="hero">
-    <div class="hero-inner">
-      <div class="hero-label">Economics · Research · Policy</div>
+    <video class="hero-video" src="hero-bg.mp4" poster="hero-bg-poster.jpg" autoplay muted loop playsinline></video>
+    <div class="hero-panel">
       <h1 class="hero-name">Nolan Sherwood</h1>
-      <div class="hero-actions">
-        <a class="btn btn-primary" onclick="show('research')">View Research →</a>
-        <a class="btn btn-ghost" onclick="show('cv')">Download CV</a>
+      <div class="hero-links">
+        <a onclick="show('projects')">Projects</a>
+        <a onclick="show('research')">Research</a>
+        <a onclick="show('cv')">CV</a>
+        <a onclick="show('contact')">Contact</a>
       </div>
-    </div>
-  </div>
-
-  <div class="about-body">
-    <div class="about-grid">
-      <div>
-        <div class="section-label">About Me</div>
-        <div class="about-bio">
-          <p>I am an economist with an M.S. in International and Development Economics from the University of San Francisco and a B.S. in Cognitive Science from UC Davis. My work focuses on the intersections of development, health, behavioral, and environmental economics.</p>
-          <p>I am currently seeking research analyst and policy roles where I can apply rigorous empirical methods to questions that matter — from how institutions shape health outcomes to how behavioral insights can improve policy design.</p>
-        </div>
-      </div>
-      <div class="avatar-wrap"><img src="headshot.jpg" alt="Nolan Sherwood"></div>
-    </div>
-
-    <div class="section-label">Research interests</div>
-    <div class="interests-row">
-      <span class="tag">Development Economics</span>
-      <span class="tag">Behavioral Economics</span>
-      <span class="tag">Health Economics</span>
-      <span class="tag">Environmental Economics</span>
-      <span class="tag">Policy Evaluation</span>
-      <span class="tag">Causal Inference</span>
     </div>
   </div>
 </section>
@@ -831,6 +780,7 @@ function show(id) {
   document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   document.getElementById('nav-' + id).classList.add('active');
+  document.body.classList.toggle('video-page', id === 'about');
   window.scrollTo(0, 0);
 }
 </script>

@@ -26,25 +26,39 @@
 
   body {
     font-family: var(--sans);
-    background: var(--cream);
+    background: #000;
     color: var(--ink);
     font-size: 15px;
     line-height: 1.7;
   }
 
-  /* The home/hero page is a fixed, full-viewport video -- no page scroll
-     while it's showing. Other sections (Portfolio/Research/CV/Contact)
-     need normal scrolling, so this is toggled on <body> by show() rather
-     than applied unconditionally. */
+  /* The background video is fixed behind every page, not just Home -- see
+     .bg-video below. The home page additionally locks scroll while it's
+     showing; other sections (Portfolio/Research/CV/Contact) scroll
+     normally over the same fixed video, toggled on <body> by show(). */
   body.video-page { overflow: hidden; height: 100vh; }
 
+  .bg-video {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+  }
+
   /* NAV */
+  /* A soft dark-to-transparent scrim, not a solid fill -- keeps the video
+     (or whatever's scrolled beneath it) visible through the nav while
+     guaranteeing enough contrast for the white nav text regardless of
+     what's behind it: video footage, or a section-header panel that's
+     scrolled up underneath it. */
   nav {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    background: transparent;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.35), rgba(0,0,0,0));
     padding: 0 2.5rem;
     display: flex;
     align-items: center;
@@ -53,12 +67,17 @@
     z-index: 100;
   }
 
+  /* Nav sits directly on the video on every page (the container's top
+     padding leaves a strip of video visible above the first card/panel
+     even on content pages), so it needs its own contrast -- white + a
+     shadow -- rather than the ink tones used against opaque cards. */
   .nav-name {
     font-family: var(--serif);
     font-size: 16px;
     font-weight: 500;
     letter-spacing: 0.01em;
-    color: var(--ink);
+    color: var(--warm-white);
+    text-shadow: 0 1px 8px rgba(0,0,0,0.45);
   }
 
   .nav-links {
@@ -70,30 +89,16 @@
   .nav-links a {
     font-size: 13px;
     font-weight: 400;
-    color: var(--ink-muted);
+    color: var(--warm-white);
     text-decoration: none;
     letter-spacing: 0.03em;
     text-transform: uppercase;
-    transition: color 0.2s;
+    transition: opacity 0.2s;
     cursor: pointer;
-  }
-
-  .nav-links a:hover, .nav-links a.active { color: var(--red); }
-
-  /* Over the video hero, nav text sits directly on unpredictable footage
-     instead of the cream page background, so it needs its own contrast
-     (white + shadow) rather than the ink tones used everywhere else. */
-  body.video-page .nav-name,
-  body.video-page .nav-links a {
-    color: var(--warm-white);
     text-shadow: 0 1px 8px rgba(0,0,0,0.45);
   }
 
-  body.video-page .nav-links a:hover,
-  body.video-page .nav-links a.active {
-    color: var(--warm-white);
-    opacity: 0.75;
-  }
+  .nav-links a:hover, .nav-links a.active { opacity: 0.75; }
 
   /* SECTIONS */
   section { display: none; animation: fadeUp 0.4s ease; }
@@ -112,27 +117,11 @@
 
   /* HERO */
   .hero {
-    position: relative;
     width: 100%;
     height: 100vh;
-    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-
-  .hero-video {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 0;
-  }
-
-  .hero-panel {
-    position: relative;
-    z-index: 1;
   }
 
   .hero-name {
@@ -221,7 +210,16 @@
   }
 
   /* SHARED SECTION STYLES */
-  .section-header { margin-bottom: 3rem; }
+  /* Opaque so the header reads clearly over the video background -- the
+     grid gaps below (Portfolio/Research cards) are left transparent on
+     purpose so the video shows through there instead. */
+  .section-header {
+    margin-bottom: 3rem;
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 2rem 2.25rem;
+  }
 
   h2 {
     font-family: var(--serif);
@@ -386,6 +384,10 @@
   .cv-grid {
     display: grid;
     grid-template-columns: 220px 1fr;
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2.5rem;
   }
 
   .cv-sidebar { padding-right: 3rem; border-right: 1px solid var(--border); }
@@ -449,6 +451,10 @@
     color: var(--ink-muted);
     line-height: 1.8;
     margin-bottom: 2rem;
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.5rem 1.75rem;
   }
 
   .contact-links { display: flex; flex-direction: column; gap: 1rem; }
@@ -549,11 +555,13 @@
 </head>
 <body class="video-page">
 
+<video class="bg-video" src="hero-bg.mp4" poster="hero-bg-poster.jpg" autoplay muted loop playsinline></video>
+
 <nav>
   <span class="nav-name">Nolan Sherwood</span>
   <ul class="nav-links">
-    <li><a onclick="show('about')" class="active" id="nav-about">About</a></li>
-    <li><a onclick="show('projects')" id="nav-projects">Portfolio</a></li>
+    <li><a onclick="show('about')" class="active" id="nav-about">Home</a></li>
+    <li><a onclick="show('projects')" id="nav-projects">Project Portfolio</a></li>
     <li><a onclick="show('research')" id="nav-research">Research</a></li>
     <li><a onclick="show('cv')" id="nav-cv">CV</a></li>
     <li><a onclick="show('contact')" id="nav-contact">Contact</a></li>
@@ -563,11 +571,10 @@
 <!-- ABOUT -->
 <section id="about" class="active">
   <div class="hero">
-    <video class="hero-video" src="hero-bg.mp4" poster="hero-bg-poster.jpg" autoplay muted loop playsinline></video>
     <div class="hero-panel">
       <h1 class="hero-name">Nolan Sherwood</h1>
       <div class="hero-links">
-        <a onclick="show('projects')">Projects</a>
+        <a onclick="show('projects')">Project Portfolio</a>
         <a onclick="show('research')">Research</a>
         <a onclick="show('cv')">CV</a>
         <a onclick="show('contact')">Contact</a>
